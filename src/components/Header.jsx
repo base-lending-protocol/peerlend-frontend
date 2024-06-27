@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { LuLogIn } from "react-icons/lu";
 import { useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { Sling as Hamburger } from 'hamburger-react'
+import WalletConnected from '../utility/WalletConnected'
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false)
   const { open } = useWeb3Modal()
-    const { address, isConnected } = useWeb3ModalAccount()
-    const { walletInfo } = useWalletInfo()
+  const { address, isConnected } = useWeb3ModalAccount()
+  const { walletInfo } = useWalletInfo()
 
   return (
    <header className='py-8 sticky top-0 w-[100%] font-playfair font-[400] lg:text-[18px] md:text-[18px] text-[16px] bg-[#2a2a2a] z-50'>
@@ -40,11 +41,17 @@ const Header = () => {
             <NavLink to='#about' className='mb-8'>About Us</NavLink>
             <NavLink className='mb-8'>Contact</NavLink>
             <NavLink className='mb-8'>Blog</NavLink>
-        <button className='bg-[#E0BB83] py-2 px-6 rounded-lg text-[#2a2a2a] font-[700] font-playfair'>Connect Wallet</button>
+            <button onClick={() => open()} className="bg-[#E0BB83] text-[16px] rounded-lg text-[#2a2a2a] font-[700] font-playfair font-barlow px-4 py-2 flex justify-center items-center gap-1 hover:bg-[#121212] hover:text-white">
+        {
+            isConnected ? <WalletConnected address={address} icon={walletInfo?.icon} /> : <>
+                <span>Connect Wallet</span>
+                <LuLogIn className="text-lg hidden md:flex" />
+            </>
+        }
+    </button>
         </div>
    )}
     </nav>
-    {/* </div> */}
    </header>
   )
 }

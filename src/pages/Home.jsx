@@ -93,7 +93,7 @@ const Home = () => {
             <img src={bgImg} alt="" className="transform -scale-x-100 w-[100%]"/>
         </div>
         </div>
-        <div className='flex justify-between items-center lg:w-[85%] md:w-[85%] w-[100%]  mx-auto mt-12 lg:flex-row md:flex-row flex-col'>
+        <div className='flex justify-between items-center lg:w-[85%] md:w-[85%] w-[90%]  mx-auto mt-12 lg:flex-row md:flex-row flex-col'>
             <div className='lg:w-[25%] md:w-[25%] w-[100%] self-baseline'>
                 <p className='text-[18px] font-[700] text-[#E0BB83]'>01. Automated Lending</p>
                 <p className='text-[16px] my-4'>Smart contracts define the rules for lending, including collateral requirements, interest rates, and repayment conditions.
@@ -171,7 +171,7 @@ const Home = () => {
     </section>
     <section className='lg:w-[85%] w-[80%] mx-auto'>
     <h2 className="lg:text-[46px] md:text-[46px] text-[28px] font-bold font-playfair mb-4 text-center lg:text-left md:text-left">Meet our<span className='text-[#E0BB83]'> Partners </span></h2>
-   <div className="slider-container w-full h-auto mt-20">
+   <div className="slider-container lg:w-full md:w-full w-[90%] mx-auto h-auto mt-20">
    <Slider {...settings}>
   {imageData.map((info) => (
     <div className=''>
@@ -181,11 +181,11 @@ const Home = () => {
      </Slider>
     </div>
     </section>
-    <section className='my-12 bg-gradient-to-r from-[#E0BB83]/10 via-[#2a2a2a] to-[#2a2a2a] py-20 b' >
+    <section className='my-12 bg-gradient-to-r from-[#E0BB83]/10 via-[#2a2a2a] to-[#2a2a2a] py-20 ' >
     <div style={{ backgroundImage: `url(${worldBg})` }} className='lg:bg-right-0  md:bg-right-0 bg-no-repeat bg-contain bg-bottom-0'>
-    <div className='lg:w-[85%] md:w-[85%] w-[100%] mx-auto'>
-    <h2 className="lg:text-[46px] md:text-[46px] text-[28px] font-bold font-playfair mb-4 w-[100%] lg:w-[50%] md:w-[50%]">Join the growing community of users who trust PeerLend, the new and innovative<span className='text-[#E0BB83]'> P2P lending platform</span></h2>
-    <div className='lg:w-[40%] md:w-[40%] w-[80%] mx-auto lg:mx-0 md:mx-0'>
+    <div className='lg:w-[85%] md:w-[85%] w-[90%] mx-auto'>
+    <h2 className="lg:text-[46px] md:text-[46px] text-[28px] font-bold font-playfair mb-4 w-[90%] lg:w-[50%] md:w-[50%]">Join the growing community of users who trust PeerLend, the new and innovative<span className='text-[#E0BB83]'> P2P lending platform</span></h2>
+    <div className='lg:w-[40%] md:w-[40%] w-[90%] mx-auto lg:mx-0 md:mx-0'>
         <ReviewSlider />
     </div>
     </div>

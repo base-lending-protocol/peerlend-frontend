@@ -63,7 +63,7 @@ const ReviewSlider = () => {
     ]
 
   return (
-    <div className="slider-container w-full h-auto mt-20">
+    <div className="slider-container lg:w-full m:w-full w-[90%] mx-auto h-auto mt-20">
     <Slider {...settings}>
     {reviewData.map((info) => (
         <div className='bg-[#0000004c] p-6 rounded-lg w-[100%]' key={info.id}>
