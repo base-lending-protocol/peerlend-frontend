@@ -46,7 +46,7 @@ const CreateRequest = () => {
   const { walletProvider } = useWeb3ModalProvider();
 
   async function handleRequest() {
-    if (!isSupportedChain(chainId)) return console.error("Wrong network");
+    // if (!isSupportedChain(chainId)) return console.error("Wrong network");
     // if (!isAddress(address)) return console.error("Invalid address");
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();

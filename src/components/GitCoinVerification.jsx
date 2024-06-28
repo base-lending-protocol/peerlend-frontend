@@ -27,10 +27,10 @@ const GitCoinVerification = () => {
     : undefined;
 
   const handleAction = async () => {
-    if (!isSupportedChain(chainId)) {
-      setError("Unsupported network");
-      return;
-    }
+    // if (!isSupportedChain(chainId)) {
+    //   setError("Unsupported network");
+    //   return;
+    // }
 
     try {
       await submitStampAndCheckPassport(address);

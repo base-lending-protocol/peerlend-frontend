@@ -43,7 +43,7 @@ const DepositCollateral = () => {
   const handleClose = () => setOpen(false);
 
   async function handleRequest() {
-    if (!isSupportedChain(chainId)) return console.error("Wrong network");
+    // if (!isSupportedChain(chainId)) return console.error("Wrong network");
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
