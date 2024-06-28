@@ -24,7 +24,7 @@ const style = {
   color: 'white',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  borderRadius: 8,
+  // borderRadius: 8,
   border: '1px solid #e0bb8395',
   boxShadow: 24,
   backgroundColor: '#1E1D34',
@@ -89,7 +89,7 @@ const CreateRequest = () => {
   return (
     <div>
       <div>
-        <button  className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg" onClick={handleOpen}>Create Request</button>
+        <button className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg" onClick={handleOpen}>Create Request</button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -116,7 +116,7 @@ const CreateRequest = () => {
                 })}
               </Select>
             </FormControl>
-            <button  className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center text-[16px] font-bold rounded-lg" onClick={handleRequest}>Create &rarr;</button>
+            <button className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center text-[16px] font-bold rounded-lg" onClick={handleRequest}>Create &rarr;</button>
           </Box>
         </Modal>
       </div>
