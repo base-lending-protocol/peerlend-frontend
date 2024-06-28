@@ -4,24 +4,22 @@ import { Outlet, Navigate } from "react-router-dom"
 import { LuLogIn } from "react-icons/lu";
 import { useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
 import WalletConnected from '../utility/WalletConnected';
-import { UseCheckIsVerified } from '../Hooks/UseCheckIsVerified';
-
 
 const DashboardLayout = () => {
     const { open } = useWeb3Modal()
     const { address, isConnected } = useWeb3ModalAccount()
     const { walletInfo } = useWalletInfo();
-    const user = UseCheckIsVerified(address)
 
-    if (user === undefined) {
-        return <div>Loading...</div>; // Add a loading spinner or component here if desired
-    }
 
-    if (!isConnected || !user) {
-        return <Navigate to="/verifymail" />;
-    }
+    // if (user === undefined) {
+    //     return <div>Loading...</div>; // Add a loading spinner or component here if desired
+    // }
 
-    return isConnected && user ? (
+    // if (!isConnected || !user) {
+    //     return <Navigate to="/verifymail" />;
+    // }
+
+    return (
         <div>
             <div className="flex justify-between lg:items-center md:items-center">
                 <Sidebar />
@@ -37,7 +35,7 @@ const DashboardLayout = () => {
                     <Outlet />
                 </div>
             </div>
-        </div>) : <Navigate to='/' />
+        </div>) 
     //   )}
 }
 

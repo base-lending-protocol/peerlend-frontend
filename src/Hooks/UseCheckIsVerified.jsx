@@ -3,7 +3,7 @@ import { readOnlyProvider } from "../constants/providers";
 import { getProtocolContract } from "../constants/contract";
 import { ethers } from "ethers";
 
-export const UseCheckIsVerified = (address) => {
+export const useCheckIsVerified = (address) => {
     const [user, setUser] = useState(undefined);
 
     useEffect(() => {

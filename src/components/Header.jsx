@@ -1,16 +1,33 @@
 import logo from '../assets/logo.svg'
-import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useState, useCallback, useEffect } from 'react'
 import { LuLogIn } from "react-icons/lu";
 import { useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { Sling as Hamburger } from 'hamburger-react'
 import WalletConnected from '../utility/WalletConnected'
+import { useCheckIsVerified } from '../Hooks/useCheckIsVerified'
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false)
   const { open } = useWeb3Modal()
   const { address, isConnected } = useWeb3ModalAccount()
   const { walletInfo } = useWalletInfo()
+  const navigate = useNavigate()
+  const user = useCheckIsVerified(address)
+
+  const change = useCallback(async () => {
+    if (isConnected) {
+        navigate("/verifymail");
+    } else if (isConnected && user ) {
+        navigate("/dashboard");
+    } else {
+        navigate('/')
+    }
+}, [isConnected, navigate]);
+
+useEffect(() => {
+    change();
+}, [change, isConnected]);
 
   return (
    <header className='py-8 sticky top-0 w-[100%] font-playfair font-[400] lg:text-[18px] md:text-[18px] text-[16px] bg-[#2a2a2a] z-50'>

@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import WalletConnected from "../../utility/WalletConnected";
 import { LuLogIn } from "react-icons/lu";
 import { useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
-import { UseCheckIsVerified } from "../../Hooks/UseCheckIsVerified";
+import { useCheckIsVerified } from "../../Hooks/useCheckIsVerified";
 import { toast } from 'react-toastify'
+import axios from 'axios'
+import bgAuth from '../../assets/authBg.jpeg'
 
 const VerifyMail = () => {
     const navigate = useNavigate();
@@ -16,8 +18,9 @@ const VerifyMail = () => {
     const { address, isConnected } = useWeb3ModalAccount()
     const { walletInfo } = useWalletInfo()
     const [showOtpForm, setShowOtpForm] = useState(false);
+    const [showEmailForm, setShowEmailForm] = useState(true)
 
-    const user = UseCheckIsVerified(address);
+    const user = useCheckIsVerified(address);
 
     const headers = {
       'Content-Type': 'application/json',
@@ -28,13 +31,15 @@ const VerifyMail = () => {
             setError("Email is required.");
             return;
         }
-
+             setShowOtpForm(true)
+            setShowEmailForm(false)
 
         try {
             await sendOtpRequest(email);
+            
         } catch (error) {
             setError('An error occurred, please try again.');
-            console.error('Submission error:', error);
+            toast.error('Submission error:', error);
         }
     };
 
@@ -51,7 +56,7 @@ const VerifyMail = () => {
         } catch (error) {
             toast.update(toastId, { render: 'Failed to send OTP. Please try again.', type: 'error', position: 'top-center', autoClose: 5000, isLoading: false });
             setError('Failed to send OTP. Please try again.');
-            console.error('Error sending OTP:', error);
+            toast.error('Error sending OTP:', error);
         }
     };
 
@@ -106,47 +111,24 @@ const VerifyMail = () => {
         }
     };
 
-    // const switchAuth = useCallback(async () => {
-    //     if (isConnected && !user) {
-    //         navigate("/verifymail");
-    //     } else {
-    //         navigate("/");
-    //     }
-    // }, [isConnected, navigate]);
-
-    // useEffect(() => {
-    //   switchAuth();
-    // }, [switchAuth, isConnected]);
-
     return (
-       <main style={{ backgroundImage: 'url("https://img.freepik.com/free-vector/gradient-golden-linear-background_52683-62358.jpg?w=1800&t=st=1719532905~exp=1719533505~hmac=d151d71c2a5b790731557b472a724f2e601448bb90b91329927d739a507a0d80")'}} className="w-[100%] h-[100vh] bg-cover bg-center bg-[#2a2a2a] bg-blend-overlay flex justify-center items-center flex-col">
-         {/* <button onClick={() => open()} className="bg-[#E0BB83] rounded-lg text-[#2a2a2a] font-[700] font-playfair font-barlow px-4 py-2 flex justify-center items-center hover:bg-[#121212] hover:text-white self-end mb-auto mt-6 mr-6">
-        {
-            isConnected ? <WalletConnected address={address} icon={walletInfo?.icon} /> : <>
-                <span>Connect Wallet</span>
-                <LuLogIn className="text-lg hidden md:flex" />
-            </>
-        }
-     </button> */}
+       <main style={{ backgroundImage: `url(${bgAuth})`}} className="w-[100%] h-[100vh] bg-cover bg-center bg-[#2a2a2a] bg-blend-overlay flex justify-center items-center flex-col">
       <h3 className='lg:text-[30px] md:text-[30px] text-[20px] font-playfair font-[700] mb-10 text-[#E0BB83]'>Verify Your Email</h3>
-      <div className="w-[100%] mb-auto">
-        {!showOtpForm ? (
-                <div className="lg:w-[40%] md:w-[40%] w-[90%] mx-auto p-8 bg-[#2a2a2a]/40 rounded-2xl border border-[#E0BB83]/40">
-                    <input
-                        type="text"
-                        placeholder='email'
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-[100%] p-4 bg-[#ffffff]/10 backdrop-blur-lg mb-4 outline-none rounded-md"
-                    />
-                    <button
-                        className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[100%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg"
-                        onClick={handleAction}
-                    >
-                        Verify &rarr;
-                    </button>
-                </div>
-            ) : (
-                <div>
+          {showEmailForm && (<div className="lg:w-[40%] md:w-[40%] w-[90%] mx-auto p-8 bg-[#2a2a2a]/40 rounded-2xl border border-[#E0BB83]/40">
+              <input
+                  type="text"
+                  placeholder='email'
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-[100%] p-4 bg-[#ffffff]/10 backdrop-blur-lg mb-4 outline-none rounded-md"
+              />
+              <button
+                  className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[100%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg"
+                  onClick={handleAction}
+              >
+                  Verify &rarr;
+              </button>
+          </div>)}
+               {(showOtpForm && <div>
                     <input
                         type="text"
                         placeholder='Email'
@@ -168,9 +150,7 @@ const VerifyMail = () => {
                     >
                         Verify OTP
                     </button>
-                </div>
-            )}
-            </div>
+                </div>)}
        </main>
     )
 }
