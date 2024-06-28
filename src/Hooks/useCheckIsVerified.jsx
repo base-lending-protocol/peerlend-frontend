@@ -4,7 +4,7 @@ import { getProtocolContract } from "../constants/contract";
 import { ethers } from "ethers";
 
 export const useCheckIsVerified = (address) => {
-    const [user, setUser] = useState(undefined);
+    const [user, setUser] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {

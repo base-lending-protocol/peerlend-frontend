@@ -27,6 +27,8 @@ const VerifyMail = () => {
 
     const user = useCheckIsVerified(address);
 
+    if (user) navigate('/dashboard')
+
     const headers = {
         'Content-Type': 'application/json',
     };

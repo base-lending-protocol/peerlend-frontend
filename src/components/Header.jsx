@@ -16,7 +16,8 @@ const Header = () => {
     const user = useCheckIsVerified(address)
 
     const change = useCallback(async () => {
-        if (isConnected && user) {
+        console.log(user)
+        if (isConnected && !user) {
             navigate("/verifymail");
         } else if (isConnected) {
             navigate("/dashboard");
