@@ -99,35 +99,35 @@ const DepositCollateral = () => {
 
   return (
     <div className="w-[100%]">
-    <button
+      <button
         onClick={handleOpen}
-       className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg"
-    >Deposit</button>
-    <Modal
+        className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg"
+      >Deposit</button>
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-    >
+      >
         <Box sx={style}>
-            <p className='lg:text-[20px] md:text-[20px] text-[18px] my-6 text-[#E0BB83] font-playfair font-bold'>Deposit collateral</p>
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label" sx={{ color: "white" }}>Token Address</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={tokenAdd}
-                    label="Token address"
-                    onChange={(e) => setTokenAdd(e.target.value)}
-                    sx={{ backgroundColor: "#ffffff23", outline: "none", color: "gray", marginBottom: "20px" }}
-                >
-                    {Object.keys(TokenList).map((address) => {
-                        const token = TokenList[address];
-                        return (<MenuItem key={token.address} value={token.address}>{token.symbol}</MenuItem>)
-                    })}
-                </Select>
-            </FormControl>
-            <input
+          <p className='lg:text-[20px] md:text-[20px] text-[18px] my-6 text-[#E0BB83] font-playfair font-bold'>Deposit collateral</p>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label" sx={{ color: "white" }}>Token Address</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={tokenAdd}
+              label="Token address"
+              onChange={(e) => setTokenAdd(e.target.value)}
+              sx={{ backgroundColor: "#ffffff23", outline: "none", color: "gray", marginBottom: "20px" }}
+            >
+              {Object.keys(TokenList).map((address) => {
+                const token = TokenList[address];
+                return (<MenuItem key={token.address} value={token.address}>{token.symbol}</MenuItem>)
+              })}
+            </Select>
+          </FormControl>
+          <input
             type="text"
             placeholder="amount of collateral"
             className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none"
@@ -138,7 +138,7 @@ const DepositCollateral = () => {
             onClick={handleRequest}
           >Deposit</button>
         </Box>
-    </Modal>
+      </Modal>
     </div>
   )
 };

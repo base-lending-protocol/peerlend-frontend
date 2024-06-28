@@ -42,7 +42,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 function App() {
 
   return (
-    <div className="text-[#FFF] lg:max-w-[1440px] md:max-w-[1440px] font-roboto-serif font-[100]">
+    <div className="text-[#FFF] mx-auto lg:max-w-[1440px] md:max-w-[1440px] font-roboto-serif font-[100]">
       <ToastContainer />
       <RouterProvider router={router} />
     </div>
