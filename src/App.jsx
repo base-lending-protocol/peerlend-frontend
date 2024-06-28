@@ -1,8 +1,8 @@
-import { 
-  createBrowserRouter, 
-  Route, 
-  createRoutesFromElements, 
-  RouterProvider 
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider
 } from "react-router-dom";
 import Home from "./pages/Home"
 import { configWeb3Modal } from "./connection";
@@ -16,15 +16,17 @@ import PortfolioDetails from './pages/Dashboard/PortfolioDetails'
 import VerifyMail from "./pages/Auth/VerifyMail";
 import VerifyLayout from "./layout/VerifyLayout";
 
+import { ToastContainer } from 'react-toastify';
+
 configWeb3Modal();
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route>
-  {/* <Route path="/" element={<HomeLayout />} > */}
+    {/* <Route path="/" element={<HomeLayout />} > */}
     <Route index element={<Home />} />
-  {/* </Route> */}
-  <Route path="/verifymail" element={<VerifyLayout />}>
+    {/* </Route> */}
+    <Route path="/verifymail" element={<VerifyLayout />}>
       <Route index element={<VerifyMail />} />
     </Route>
     <Route path='/dashboard' element={<DashboardLayout />}>
@@ -34,16 +36,17 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="explore" element={<Explore />} />
       <Route path="explore/:id" element={<ExploreDetails />} />
     </Route>
-    </Route>
+  </Route>
 ))
 
 function App() {
 
-    return (
-      <div className="text-[#FFF] lg:max-w-[1440px] md:max-w-[1440px] font-roboto-serif font-[100]">
-        <RouterProvider router={router} />
-    </div> 
-    )
+  return (
+    <div className="text-[#FFF] lg:max-w-[1440px] md:max-w-[1440px] font-roboto-serif font-[100]">
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </div>
+  )
 }
 
 export default App
