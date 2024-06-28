@@ -4,27 +4,13 @@ import { RiCompassDiscoverFill } from "react-icons/ri";
 import { PieChart } from '@mui/x-charts/PieChart';
 import RecentData from '../../components/RecentData';
 import { NavLink } from 'react-router-dom';
-import { LuLogIn } from "react-icons/lu";
-import { useWalletInfo, useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
-import WalletConnected from '../../utility/WalletConnected';
 
 const Dashboard = () => {
-  const { open } = useWeb3Modal()
-    const { address, isConnected } = useWeb3ModalAccount()
-    const { walletInfo } = useWalletInfo();
 
   return (
    <main>
     <div className='flex justify-between items-center mb-6'>
     <h2 className="lg:text-[24px] md:text-[24px] text-[20px] text-[#E0BB83] font-playfair font-bold mb-4 items-center">Welcome</h2>
-    <button onClick={() => open()} className="bg-[#E0BB83] rounded-lg text-[#2a2a2a] font-[700] font-playfair font-barlow px-4 py-2 flex justify-center items-center gap-1 hover:bg-[#121212] hover:text-white">
-        {
-            isConnected ? <WalletConnected address={address} icon={walletInfo?.icon} /> : <>
-                <span>Connect Wallet</span>
-                <LuLogIn className="text-lg hidden md:flex" />
-            </>
-        }
-    </button>
     </div>
     <section className='flex flex-col lg:flex-row md:flex-row justify-between mb-6'>
         <div className='bg-gradient-to-r from-[#E0BB83]/40 via-[#2a2a2a] to-[#E0BB83]/30 lg:p-6 md:p-6 p-4 rounded-md lg:w-[60%] md:w-[60%] w-[100%] mb-4 shadow-lg'>

@@ -12,6 +12,8 @@ import "slick-carousel/slick/slick-theme.css";
 import ReviewSlider from '../components/ReviewSlider'
 import worldBg from '../assets/connect.png'
 import Faqs from '../components/Faqs'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const Home = () => {
     const settings = {
@@ -56,19 +58,19 @@ const Home = () => {
       const imageData = [
         {
             id: 1,
-            imageLogo: './starknet.png'
+            imageLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Chainlink_Logo_Blue.svg/2560px-Chainlink_Logo_Blue.svg.png'
         },
         {
             id: 2,
-            imageLogo: './cairo.png'
+            imageLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQtCSGWlBt97s8tbJGhTAsfO7yOBemR9Y9-w&s'
         },
         {
             id: 3,
-            imageLogo: './starkware.png'
+            imageLogo: 'https://d26zjke7m1t6hh.cloudfront.net/static/metadata_logos/solidityIntroSymbolLogo.webp'
         },
         {
             id: 4,
-            imageLogo: './eth.png'
+            imageLogo: 'https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png'
         },
         {
             id: 5,
@@ -82,6 +84,7 @@ const Home = () => {
       
   return (
    <main>
+    <Header />
     <section className='bg-gradient-to-r from-[#2a2a2a] via-[#2a2a2a] to-[#E0BB83]/30 py-20'>
     <div className='flex justify-between lg:flex-row md:flex-row flex-col'>
         <div className='w-[100%] lg:w-[37%] md:w-[37%] mx-auto lg:mt-24 md:mt-24 p-6 lg:p-0 md:p-0'>
@@ -208,6 +211,7 @@ const Home = () => {
         <Faqs />
     </div>
   </section>
+  <Footer />
    </main>
   )
 }

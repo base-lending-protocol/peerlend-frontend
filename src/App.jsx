@@ -6,30 +6,35 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home"
 import { configWeb3Modal } from "./connection";
-import HomeLayout from "./layout/HomeLayout";
+// import HomeLayout from "./layout/HomeLayout";
 import DashboardLayout from "./layout/DashboardLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Portfolio from "./pages/Dashboard/Portfolio";
 import Explore from "./pages/Dashboard/Explore";
 import ExploreDetails from "./pages/Dashboard/ExploreDetails";
 import PortfolioDetails from './pages/Dashboard/PortfolioDetails'
+import VerifyMail from "./pages/Auth/VerifyMail";
+import VerifyLayout from "./layout/VerifyLayout";
 
 configWeb3Modal();
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route>
-  <Route path="/" element={<HomeLayout />} >
+  {/* <Route path="/" element={<HomeLayout />} > */}
     <Route index element={<Home />} />
-  </Route>
-  <Route path="/dashboard" element={<DashboardLayout />}>
+  {/* </Route> */}
+  <Route path="/verifymail" element={<VerifyLayout />}>
+      <Route index element={<VerifyMail />} />
+    </Route>
+    <Route path='/dashboard' element={<DashboardLayout />}>
       <Route index element={<Dashboard />} />
       <Route path="portfolio" element={<Portfolio />} />
       <Route path="portfolio/:id" element={<PortfolioDetails />} />
       <Route path="explore" element={<Explore />} />
       <Route path="explore/:id" element={<ExploreDetails />} />
     </Route>
-  </Route>
+    </Route>
 ))
 
 function App() {
