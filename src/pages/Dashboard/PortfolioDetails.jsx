@@ -18,6 +18,7 @@ const PortfolioDetails = () => {
     const [transaction, setTransaction] = useState(null);
 
     useEffect(() => {
+        console.log("All Requests:", allRequests)
         if (allRequests.length > 0) {
             const foundTransaction = allRequests.find(data => String(data?.id) === id);
             setTransaction(foundTransaction);
@@ -38,7 +39,7 @@ const PortfolioDetails = () => {
                     <h2 className='my-4 text-[#E0BB83] font-bold'>Manage Requests</h2>
                     <div className='flex justify-between'>
                         <MakeOffer />
-                        <ServiceRequest id />
+                        <ServiceRequest id={id} request={transaction} />
                     </div>
                 </div>
             </div>) : <div>

@@ -30,70 +30,26 @@ const style = {
 };
 
 const ServiceRequest = (request) => {
-  const [requestId, setRequestId] = useState(request.id);
-  const [tokenAdd, setTokenAdd] = useState("");
-  const [borrower, setBorrower] = useState("");
-  const [lender, setLender] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [interest, setInterest] = useState("");
-  const [totalRepayment, setTotalRepayment] = useState(0);
-  const [returnDate, setReturnDate] = useState("");
-  const [loanCurrency, setLoanCurrency] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
-  async function handleChange(requestId) {
-
-    if (requestId === "" || requestId === "0" || requestId === undefined) {
-      setBorrower("");
-      setLender("");
-      setAmount("");
-      setInterest("");
-      setTotalRepayment("");
-      setReturnDate("");
-      setLoanCurrency("");
-      return console.log("No request found");
-    }
-
-    const readWriteProvider = getProvider(walletProvider);
-    // const signer = await readWriteProvider.getSigner();
-
-    const contract = getProtocolContract(readWriteProvider);
-    const requests = await contract.getRequestById(requestId);
-
-    // console.log("=====>", requests);
-
-
-    const lender = requests[7];
-    const tokenDecimals = TokenList[requests[8]].decimals;
-
-
-    const _borrower = requests[1];
-    const _amount = ethers.formatUnits(requests[2].toString(), tokenDecimals).toString();
-    const _interest = requests[3].toString();
-    const _totalRepayment = ethers.formatUnits(requests[4].toString(), tokenDecimals).toString();
-    const _returnDate = requests[6].toString();
-    const _tokenName = TokenList[requests[8]].name;
-    const _tokenAdd = TokenList[requests[8]].address;
-
-    setBorrower(_borrower);
-    setLender(lender);
-    setAmount(_amount);
-    setInterest(_interest);
-    setTotalRepayment(_totalRepayment);
-    setReturnDate(_returnDate);
-    setLoanCurrency(_tokenName);
-    setTokenAdd(_tokenAdd);
-
-    // console.log("=====>", requests)
-  }
+  const requestId = request.id;
+  const requestDetails = request.request;
+  const lender = requestDetails?.lender;
+  const tokenDecimals = TokenList[requestDetails?.loanReq].decimals
+  const borrower = requestDetails?.address;
+  const amount = ethers.formatUnits(requestDetails?.amount.toString(), tokenDecimals).toString();
+  const interest = requestDetails?.interest.toString();
+  const totalRepayment = ethers.formatUnits(requestDetails?.repayment.toString(), tokenDecimals).toString();
+  const returnDate = new Date(Number(requestDetails?.rDate) * 1000).toDateString();
+  const loanCurrency = TokenList[requestDetails?.loanReq].name;
+  const tokenAdd = TokenList[requestDetails?.loanReq].address;
+  const loanStatus = requestDetails?.loanStatus.toString();
 
   async function handleRequest() {
-    // if (!isSupportedChain(chainId)) return console.error("Wrong network");
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
@@ -140,15 +96,14 @@ const ServiceRequest = (request) => {
 
   };
 
-  handleChange(requestId);
-
   return (
     <div className="lg:w-[48%] md:w-[48%] w-[100%]">
       <div>
-        <button
+        {loanStatus === "0" && <button
           onClick={handleOpen}
+          // {...(loanStatus !== "0" ? { disabled: true } : {})}
           className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg"
-        >Service</button>
+        >Service</button>}
         <Modal
           open={open}
           onClose={handleClose}
@@ -156,10 +111,10 @@ const ServiceRequest = (request) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <input type="text" placeholder='Request ID' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={requestId} onChange={(e) => handleChange(e)} />
+            {/* <input type="text" placeholder='Request ID' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={requestId} onChange={(e) => handleChange(e)} /> */}
             <input type="text" placeholder='Lender' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={lender} disabled />
             <input type="text" placeholder='Loan Currency' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={loanCurrency} disabled />
-            <input type="text" placeholder='Amount' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={amount} />
+            <input type="text" placeholder='Amount' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={amount} disabled />
             <input type="text" placeholder='Interest' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={interest} disabled />
             <input type="text" placeholder='Total Repayment' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={totalRepayment} disabled />
             <input type="text" placeholder='Return date' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" value={returnDate} disabled />
