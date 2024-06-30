@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { isSupportedChain } from "../utility";
+// import { isSupportedChain } from "../utility";
 // import { isAddress } from "ethers";
 import {
-  useWeb3ModalAccount,
+  // useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
 import { getProtocolContract } from "../constants/contract";
@@ -11,12 +11,15 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+// import Select from '@mui/material/Select';
 import Modal from '@mui/material/Modal';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
 import { ethers } from "ethers";
 import TokenList from '../constants/tokenList';
+import { tokens } from "../constants/OnchainTokenList";
+import { TokenSelectDropdown } from '@coinbase/onchainkit/token';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -38,11 +41,12 @@ const CreateRequest = () => {
   const [interest, setInterest] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [loanCurrency, setLoanCurrency] = useState("");
+  const [selectLoanCurrency, setSelectLoanCurrency] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { chainId } = useWeb3ModalAccount();
+  // const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
   async function handleRequest() {
@@ -85,7 +89,13 @@ const CreateRequest = () => {
 
       handleClose();
     }
-  };
+  }
+
+  const handleTokenChange = (e) => {
+    console.log(e);
+    setSelectLoanCurrency(e);
+    setLoanCurrency(e.address);
+  }
 
   return (
     <div>
@@ -101,8 +111,9 @@ const CreateRequest = () => {
             <input type="text" placeholder='Amount' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" onChange={(e) => setAmount(e.target.value)} />
             <input type="text" placeholder='Interest' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" onChange={(e) => setInterest(e.target.value)} />
             <input type="Date" placeholder='Return date' className="rounded-lg w-[100%] p-4 bg-[#ffffff23] backdrop-blur-lg mb-4 outline-none" onChange={(e) => setReturnDate(e.target.value)} />
+              <TokenSelectDropdown sx={{ backgroundColor: "#ffffff23", outline: "none", color: "gray", marginBottom: "20px" }} token={selectLoanCurrency} setToken={handleTokenChange} options={tokens}/>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label" sx={{ color: "white" }}>Loan Currency</InputLabel>
+              {/* <InputLabel id="demo-simple-select-label" sx={{ color: "white" }}>Loan Currency</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -115,7 +126,7 @@ const CreateRequest = () => {
                   const token = TokenList[address];
                   return (<MenuItem key={token.address} value={token.address}>{token.symbol}</MenuItem>)
                 })}
-              </Select>
+              </Select> */}
             </FormControl>
             <button className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center text-[16px] font-bold rounded-lg" onClick={handleRequest}>Create &rarr;</button>
           </Box>

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { isSupportedChain } from "../utility";
+// import { isSupportedChain } from "../utility";
 import {
-  useWeb3ModalAccount,
+  // useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
 import {
@@ -13,12 +13,15 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import Select from "@mui/material/Select";
 import Modal from "@mui/material/Modal";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
 import { ethers } from "ethers";
-import TokenList from "../constants/tokenList";
+// import TokenList from "../constants/tokenList";
+import { TokenSelectDropdown } from '@coinbase/onchainkit/token';
+import { tokens } from "../constants/OnchainTokenList";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -34,9 +37,10 @@ const style = {
 };
 
 const DepositCollateral = () => {
-  const { chainId } = useWeb3ModalAccount();
+  // const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
   const [tokenAdd, setTokenAdd] = useState("");
+  const [selectTokenAdd, setSelectTokenAdd] = useState("");
   const [depositAmount, setDepositAmount] = useState(0);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -97,6 +101,12 @@ const DepositCollateral = () => {
     }
   }
 
+  const handleTokenChange = (e) => {
+    console.log(e);
+    setSelectTokenAdd(e);
+    setTokenAdd(e.address);
+  }
+
   return (
     <div className="w-[100%]">
       <button
@@ -111,9 +121,10 @@ const DepositCollateral = () => {
       >
         <Box sx={style}>
           <p className='lg:text-[20px] md:text-[20px] text-[18px] my-6 text-[#E0BB83] font-playfair font-bold'>Deposit collateral</p>
+            <TokenSelectDropdown sx={{ backgroundColor: "#ffffff23", outline: "none", color: "gray", marginBottom: "20px" }} token={selectTokenAdd} setToken={handleTokenChange} options={tokens}/>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" sx={{ color: "white" }}>Token Address</InputLabel>
-            <Select
+            {/* <InputLabel id="demo-simple-select-label" sx={{ color: "white" }}>Token Address</InputLabel> */}
+            {/* <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={tokenAdd}
@@ -125,7 +136,7 @@ const DepositCollateral = () => {
                 const token = TokenList[address];
                 return (<MenuItem key={token.address} value={token.address}>{token.symbol}</MenuItem>)
               })}
-            </Select>
+            </Select> */}
           </FormControl>
           <input
             type="text"
