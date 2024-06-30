@@ -38,7 +38,7 @@ const PortfolioDetails = () => {
                     <p>Return date: <span>{(new Date(Number(transaction?.rDate) * 1000)).toLocaleString()}</span></p>
                     <h2 className='my-4 text-[#E0BB83] font-bold'>Manage Requests</h2>
                     <div className='flex justify-between'>
-                        <MakeOffer />
+                        <MakeOffer id={id} request={transaction} />
                         <ServiceRequest id={id} request={transaction} />
                     </div>
                 </div>

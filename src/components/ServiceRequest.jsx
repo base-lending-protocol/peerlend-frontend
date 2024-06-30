@@ -39,7 +39,7 @@ const ServiceRequest = (request) => {
   const requestId = request.id;
   const requestDetails = request.request;
   const lender = requestDetails?.lender;
-  const tokenDecimals = TokenList[requestDetails?.loanReq].decimals
+  const tokenDecimals = TokenList[requestDetails?.loanReq].decimals;
   const borrower = requestDetails?.address;
   const amount = ethers.formatUnits(requestDetails?.amount.toString(), tokenDecimals).toString();
   const interest = requestDetails?.interest.toString();

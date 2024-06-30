@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { formatUnits } from "ethers";
 import { RiFolderWarningFill } from "react-icons/ri";
 import UseFetchRequests from '../../Hooks/UseFetchRequests';
-import LoadingSpinner from '../../components/LoadingSpinner'
+import LoadingSpinner from '../../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 
 import tokenList from '../../constants/tokenList';
@@ -52,7 +52,7 @@ const Explore = () => {
               </div>
             ) : (allRequests.map((data, index) => (
               <div key={index} className="w-[100%] lg:w-[31%] md:w-[31%] rounded-lg border border-bg-ash/35 bg-bg-gray p-4 mt-6">
-                <Link to={`/dashboard/transaction/${data?.id}`}>
+                <Link to={`/dashboard/explore/${data?.id}`}>
                   <img src={requestImage} alt="" className="w-[100%] rounded-lg h-[200px] object-cover object-center mb-4" />
                   <p>Amount: {formatUnits(data?.amount, tokenList[data?.loanReq]?.decimals)}</p>
                   <p>Rate: {data?.interest.toString()}<span>&#37;</span></p>
