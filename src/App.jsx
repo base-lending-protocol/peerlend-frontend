@@ -17,6 +17,8 @@ import VerifyMail from "./pages/Auth/VerifyMail";
 import VerifyLayout from "./layout/VerifyLayout";
 
 import { ToastContainer } from 'react-toastify';
+import '@coinbase/onchainkit/styles.css';
+import OnchainProviders from "./Hooks/OnchainProvider";
 
 configWeb3Modal();
 
@@ -44,7 +46,9 @@ function App() {
   return (
     <div className="text-[#FFF] mx-auto lg:max-w-[1440px] md:max-w-[1440px] font-roboto-serif font-[100]">
       <ToastContainer />
-      <RouterProvider router={router} />
+      <OnchainProviders>
+        <RouterProvider router={router} />
+      </OnchainProviders>
     </div>
   )
 }
