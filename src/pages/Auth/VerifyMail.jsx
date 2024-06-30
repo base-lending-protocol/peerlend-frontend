@@ -102,6 +102,7 @@ const VerifyMail = () => {
             if (updateRes.status === 200) {
                 setError('User verified successfully.');
                 toast.update(toastId, { render: 'User verified successfully.', type: 'success', position: 'top-center', autoClose: 5000, isLoading: false });
+                navigate('/dashboard');
             } else {
                 setError('Failed to verify user. Please try again.');
                 throw new Error('Failed to verify user. Please try again.');

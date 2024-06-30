@@ -8,10 +8,6 @@ import { getProvider } from "../constants/providers";
 import { toast } from "react-toastify";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 
 import { ethers } from "ethers";
 

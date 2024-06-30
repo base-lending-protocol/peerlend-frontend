@@ -44,3 +44,14 @@ export const convertService = (service) => {
             return "CLOSED"
     }
 }
+
+export const convertOfferStatus = (status) => {
+    switch (status) {
+        case "0":
+            return "OPEN"
+        case "1":
+            return "REJECTED"
+        case "2":
+            return "ACCEPTED"
+    }
+}
