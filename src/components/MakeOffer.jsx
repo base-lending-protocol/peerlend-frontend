@@ -33,7 +33,7 @@ const MakeOffer = (request) => {
     const requestDetails = request.request;
     const { walletProvider } = useWeb3ModalProvider();
     const { address } = useWeb3ModalAccount();
-    const [interest, setInterest] = useState(requestDetails?.interest);
+    const [interest, setInterest] = useState(requestDetails?.interest.toString());
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -82,10 +82,10 @@ const MakeOffer = (request) => {
 
     return (
         <div className="lg:w-[48%] md:w-[48%] w-[100%]">
-            <button
+            {requestStatus === "OPEN" && <button
                 onClick={handleOpen}
                 className="bg-[#E0BB83] text-[#2a2a2a] my-2 hover:bg-[#2a2a2a] hover:text-[white] hover:font-bold px-4 py-2  font-playfair w-[95%] mx-auto text-center lg:text-[18px] md:text-[18px] text-[16px] font-bold rounded-lg"
-            >Offer</button>
+            >Offer</button>}
             <Modal
                 open={open}
                 onClose={handleClose}
